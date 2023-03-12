@@ -2,6 +2,8 @@
 using EcommerceDataAnalysisToolServer.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using EcommerceDataAnalysisToolServer.Interfaces;
+using EcommerceDataAnalysisToolServer.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,8 @@ builder.Services.AddEntityFrameworkMySql()
                                          new MySqlServerVersion(new Version()))
                                          );
 //Add repository references
-//builder.Services.AddScoped<IExpenseAnalysisRepository, ExpenseAnalysisRepository>();
+builder.Services.AddScoped<ISalesDataAnalysisRepository, SalesDataAnalysisRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

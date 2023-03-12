@@ -7,31 +7,20 @@ namespace EcommerceDataAnalysisToolServer.Models
         {
         }
 
-        /// <summary>
-        /// Constructor for bill object
-        /// </summary>
-        /// <param name="date">date of the bill</param>
-        /// <param name="amount">Bill Amount</param>
-        /// <param name="category">Category of expense</param>
-        public Ecommerce(int sno, DateTime crawlTimestamp, string productName, string productCategoryTree, double retailPrice, double discountedPrice, string brand)
+        public Ecommerce(DateTime date, string productName, string productCategory, double retailPrice, string brand)
         {
-            Sno = sno;
-            CrawlTimestamp = crawlTimestamp;
+            Date = date;
             ProductName = productName;
-            ProductCategoryTree = productCategoryTree;
-            RetailPrice = retailPrice;
-            DiscountedPrice = discountedPrice;
+            ProductCategory = productCategory;
+            Price = retailPrice;
             Brand = brand;
 
         }
-        //Getting and setting the value with with the variables.
         public int Id { get; set; }
-        public int Sno { get; set; }
-        public DateTime CrawlTimestamp { get; set; }
+        public DateTime Date { get; set; }
         public string ProductName { get; set; }
-        public string ProductCategoryTree { get; set; }
-        public double RetailPrice { get; set; }
-        public double DiscountedPrice { get; set; }
+        public string ProductCategory { get; set; }
+        public double Price { get; set; }
         public string Brand { get; set; }
     }
 }
