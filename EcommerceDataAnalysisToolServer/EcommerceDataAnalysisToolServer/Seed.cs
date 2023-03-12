@@ -44,34 +44,37 @@ namespace EcommerceDataAnalysisToolServer
                     while (!sr.EndOfStream)
                     {
                         string[] line = sr.ReadLine().Split(',');
-                        if (c != 0)
+                        if (c != 0 && line.Length >= 4)
                         {
-                            DateTime d = DateTime.ParseExact(line[2], "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                            int i = 5;
-                            while (line[i].ToLower().Contains('>') || line[i].ToLower().Contains(']') || line[i].ToLower().Contains('['))
+                            DateTime d = DateTime.Parse(line[0]);
+
+                            string category = "";
+                            if (line[2].Contains("[\"\""))
                             {
-                                line[4] += "," + line[i];
-                                i += 1;
+                                int startIndex = line[2].IndexOf("[\"\"") + 3;
+                                int endIndex = line[2].IndexOf(">");
+                                if (startIndex >= 0 && endIndex >= 0)
+                                {
+                                    category = line[2].Substring(startIndex, endIndex - startIndex).Trim();
+                                }
                             }
-                            double p1 = Convert.ToDouble(line[i]);
-                            double p2 = Convert.ToDouble(line[i+1]);
-                            //string[] line = sr.ReadLine().Split(',');
-                            //   DateTime.ParseExact(s, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
-                            ecommerces.Add(new Ecommerce(0,d,
-                                line[3], line[4],p1,p2, line[i+2]));
+
+                            double p1 = 0;
+                            if (double.TryParse(line[3], out p1))
+                            {
+                                ecommerces.Add(new Ecommerce(d, line[1], category, p1, line[5]));
+                            }
                         }
                         c += 1;
                     }
                 }
             }
-
             catch (Exception e)
             {
                 Console.WriteLine("An error occurred: " + e.Message);
             }
-            //return bills;
+        }
 
-            }
 
     }
 }
