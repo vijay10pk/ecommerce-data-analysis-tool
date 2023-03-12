@@ -2,6 +2,7 @@
 using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Data;
 using EcommerceDataAnalysisToolServer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -12,6 +13,16 @@ namespace EcommerceDataAnalysisToolServer.Repository
         public SalesDataAnalysisRepository(DataContext context)
         {
             _context = context;
+        }
+
+        /// <summary>
+        /// Save the changes to the database
+        /// </summary>
+        /// <returns></returns>
+        public bool Save()
+        {
+            int saved = _context.SaveChanges();
+            return saved == 1;
         }
 
         /// <summary>
@@ -79,15 +90,21 @@ namespace EcommerceDataAnalysisToolServer.Repository
             return Save();
         }
 
-
         /// <summary>
-        /// Save the changes to the database
+        /// Method that calculate total revenue for the given year
         /// </summary>
-        /// <returns></returns>
-        public bool Save()
+        /// <param name="year">Year</param>
+        /// <returns>Total Revenue for the given year</returns>
+        public double GetTotalRevenueForYear(int year)
         {
-            int saved = _context.SaveChanges();
-            return saved == 1;
+            var startDate = new DateTime(year, 1, 1);
+            var endDate = startDate.AddYears(1);
+
+            var totalSales = _context.Ecommerce
+                .Where(s => s.Date >= startDate && s.Date < endDate)
+                .Sum(s => s.Price);
+
+            return totalSales;
         }
     }
 }

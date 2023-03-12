@@ -19,18 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Models\" />
-    <None Remove="Repository\" />
-    <None Remove="Interfaces\" />
-    <None Remove="Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Data\" />
-  </ItemGroup>
 </Project>
