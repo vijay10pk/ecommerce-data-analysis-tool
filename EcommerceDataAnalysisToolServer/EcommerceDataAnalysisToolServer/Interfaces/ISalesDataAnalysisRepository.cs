@@ -13,6 +13,7 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         bool AddSalesData(Ecommerce saleData);
         bool EditSalesData(Ecommerce updateSaleData);
         bool DeleteSalesData(int id);
+        double GetTotalRevenueForYear(int year);
     }
 }
 

@@ -5,6 +5,7 @@ using EcommerceDataAnalysisToolServer.Repository;
 using EcommerceDataAnalysisToolServer.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace EcommerceDataAnalysisToolServer.Controllers
@@ -132,6 +133,18 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             {
                 return Ok("sale data deleted");
             }
+        }
+
+        /// <summary>
+        /// Method to get the total revenue for the given year
+        /// </summary>
+        /// <param name="year">Year for which we want to get total revenue</param>
+        /// <returns>Total revenue of the year</returns>
+        [HttpGet("sales/{year}")]
+        public IActionResult GetTotalRevenueForYear(int year)
+        {
+            double totalRevenueInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
+            return Ok(totalRevenueInYear);
         }
 
     }
