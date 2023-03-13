@@ -108,14 +108,39 @@ namespace EcommerceDataAnalysisToolServer.Repository
         }
 
         /// <summary>
-        /// Method to get the category which has the highest sales in a year 
+        /// Method to get the category which has the highest sales in a year or month
         /// </summary>
         /// <param name="year">Year</param>
         /// <returns>name of the category</returns>
-        public string GetCategoryWhichHasHighestSales(int year)
+        public string GetCategoryWhichHasHighestSales(int year, int month)
         {
-            var startDate = new DateTime(year, 1, 1);
-            var endDate = startDate.AddYears(1);
+            var startDate = new DateTime();
+            var endDate = new DateTime();
+            var season = "";
+            String seasonAndCategory = "";
+
+            if (month > 0)
+            {
+                startDate = new DateTime(year, month, 1);
+                endDate = startDate.AddMonths(1);
+                if (month == 5 || month == 6)
+                {
+                    season = "spring sale";
+                }
+                else if (month > 10 && month <= 12)
+                {
+                    season = "Holiday Sale";
+                }
+                else if (month == 1)
+                {
+                    season = "New year sale";
+                }
+            }
+            else
+            {
+                startDate = new DateTime(year, 1, 1);
+                endDate = startDate.AddYears(1);
+            }
 
 
             var maxSales = _context.Ecommerce
@@ -123,8 +148,11 @@ namespace EcommerceDataAnalysisToolServer.Repository
               .Max(s => s.Price);
 
             Ecommerce category = _context.Ecommerce.Where(s => s.Price == maxSales).FirstOrDefault();
-
-            return category.ProductCategory;
+            if(season!="")
+             seasonAndCategory = "season has highest sale in the year:    " + season + "\n" + "category:  " + category.ProductCategory + "";
+            else
+                seasonAndCategory = "category:  " + category.ProductCategory + "";
+            return seasonAndCategory;
         }
     }
 }
