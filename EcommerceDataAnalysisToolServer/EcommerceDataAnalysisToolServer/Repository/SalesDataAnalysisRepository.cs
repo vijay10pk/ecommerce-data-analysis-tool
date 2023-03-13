@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Data;
 using EcommerceDataAnalysisToolServer.Interfaces;
@@ -227,6 +227,20 @@ namespace EcommerceDataAnalysisToolServer.Repository
                                     .Where(s => s.Date.Year == year && s.Date.Month == month)
                                     .Sum(s => s.Price);
             return saleInMonth;
+        }
+        public string GetFilterBaseOnYear(int year)
+        {
+            double TotalRevenue = GetTotalRevenueForYear(year);
+            String GetCategory = GetCategoryWhichHasHighestSales(year, 0);
+            //add code for average sales
+            double totalSalesInYear = GetTotalRevenueForYear(year);
+            double getTotalSales = GetTotalSales();
+            double averageSaleInYear = (totalSalesInYear / getTotalSales);
+            //add code for highest sold product
+           // Task<Ecommerce> highestSaledProduct = GetHighestSoldProductForYear(year);
+            var data = "TotalRevenue:    " + TotalRevenue + "\n" + "category which sold most:  " + GetCategory + "\n" + "average sale in the year: " + averageSaleInYear + "";
+
+            return data;
         }
     }
 }

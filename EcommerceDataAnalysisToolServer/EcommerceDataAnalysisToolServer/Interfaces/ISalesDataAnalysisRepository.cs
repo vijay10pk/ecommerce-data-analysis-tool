@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EcommerceDataAnalysisToolServer.Models;
 namespace EcommerceDataAnalysisToolServer.Interfaces
 {
@@ -19,6 +19,8 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         Task<List<Ecommerce>> GetSalesForMonthAndYearAsync(int month, int year);
         double GetTotalSales();
         double GetAverageSalesForMonth(int month, int year);
+
+        string GetFilterBaseOnYear(int year);
 
     }
 
