@@ -157,6 +157,18 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             string category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year, month);
             return Ok(category);
         }
+        /// <summary>
+        /// Method to get the sales details based on category
+        ///month is optional
+        /// </summary>
+        /// <param name="category">Year for which we want to get the highest sales</param>
+        /// <returns>name of the category</returns>
+        [HttpGet("filterByCategory/{name}")]
+        public IActionResult GetFilterByCategory(string name)
+        {
+            string category = _salesDataAnalysisRepository.GetFilterByCategory(name);
+            return Ok(category);
+        }
 
 
     }

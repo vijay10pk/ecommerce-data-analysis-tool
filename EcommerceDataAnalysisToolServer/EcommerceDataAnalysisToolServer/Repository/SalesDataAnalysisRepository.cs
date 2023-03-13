@@ -3,6 +3,7 @@ using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Data;
 using EcommerceDataAnalysisToolServer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -153,6 +154,62 @@ namespace EcommerceDataAnalysisToolServer.Repository
             else
                 seasonAndCategory = "category:  " + category.ProductCategory + "";
             return seasonAndCategory;
+        }
+        /// <summary>
+        /// Method to get the category which has the highest sales in a year or month
+        /// </summary>
+        /// <param name="year">Year</param>
+        /// <returns>name of the category</returns>
+        public string GetFilterByCategory(string name)
+        {
+            var totalSales1 = _context.Ecommerce
+                .Select(s => s.Date)
+                .Distinct();
+
+            int r = totalSales1.Count();
+            List<int> myNum = new List<int>();
+            List<int> year = new List<int>();
+            List<double> DataByyear = new List<double>();
+
+            var UniqueYear = "";
+                       
+                foreach (var s in totalSales1)
+                {
+                    Console.WriteLine(s.ToString().Length);
+                    UniqueYear = s.ToString();
+                    if(UniqueYear.Length == 21) {
+                    UniqueYear = UniqueYear.Substring(5, 4);
+                }
+                else if(UniqueYear.Length == 22)
+                {
+                    UniqueYear = UniqueYear.Substring(6, 4);
+                }
+                else
+                {
+                    UniqueYear = UniqueYear.Substring(4, 4);
+                }
+
+
+                myNum.Add(int.Parse(UniqueYear));
+                
+                }
+
+            var years = myNum.Distinct();
+
+
+
+            foreach (int eachyear in years)
+            {
+                DataByyear.Add(GetTotalRevenueForYear(eachyear));
+            }
+            years  = years.ToList();
+            String result = "";
+            for (int i = 0; i < DataByyear.Count; i++)
+            {
+                result = "total revenue in the year:" + years.ElementAt(i) + "is:" + i +"/n";
+            }
+
+            return result;
         }
     }
 }
