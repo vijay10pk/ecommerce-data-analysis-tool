@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
-	public class SalesDataAnalysisRepository : ISalesDataAnalysisRepository
+    public class SalesDataAnalysisRepository : ISalesDataAnalysisRepository
     {
         private DataContext _context;
 
@@ -151,8 +151,8 @@ namespace EcommerceDataAnalysisToolServer.Repository
               .Max(s => s.Price);
 
             Ecommerce category = _context.Ecommerce.Where(s => s.Price == maxSales).FirstOrDefault();
-            if(season!="")
-             seasonAndCategory = "season has highest sale in the year:    " + season + "\n" + "category:  " + category.ProductCategory + "";
+            if (season != "")
+                seasonAndCategory = "season has highest sale in the year:    " + season + "\n" + "category:  " + category.ProductCategory + "";
             else
                 seasonAndCategory = "category:  " + category.ProductCategory + "";
             return seasonAndCategory;
@@ -203,6 +203,31 @@ namespace EcommerceDataAnalysisToolServer.Repository
                                     .ToListAsync();
         }
 
+        /// <summary>
+        /// Method to get the total sale 
+        /// </summary>
+        /// <returns>return the total sale amount from the DB</returns>
+        public double GetTotalSales()
+        {
+            var totalSales = _context.Ecommerce
+                .Sum(s => s.Price);
+
+            return totalSales;
+        }
+
+        /// <summary>
+        /// Method to get the sales in the particular month of the given year
+        /// </summary>
+        /// <param name="month">month in MM format</param>
+        /// <param name="year">year in MM format</param>
+        /// <returns>sales from the particular month of the given year</returns>
+        public double GetAverageSalesForMonth(int month, int year)
+        {
+            var saleInMonth = _context.Ecommerce
+                                    .Where(s => s.Date.Year == year && s.Date.Month == month)
+                                    .Sum(s => s.Price);
+            return saleInMonth;
+        }
     }
 }
 

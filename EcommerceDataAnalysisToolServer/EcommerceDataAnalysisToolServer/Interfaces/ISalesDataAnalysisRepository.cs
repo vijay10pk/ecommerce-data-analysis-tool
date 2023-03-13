@@ -17,6 +17,9 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         string GetCategoryWhichHasHighestSales(int year, int month);
         Task<Ecommerce> GetHighestSoldProductForYear(int year);
         Task<List<Ecommerce>> GetSalesForMonthAndYearAsync(int month, int year);
+        double GetTotalSales();
+        double GetAverageSalesForMonth(int month, int year);
+
     }
 
 }
