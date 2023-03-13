@@ -106,6 +106,26 @@ namespace EcommerceDataAnalysisToolServer.Repository
 
             return totalSales;
         }
+
+        /// <summary>
+        /// Method to get the category which has the highest sales in a year 
+        /// </summary>
+        /// <param name="year">Year</param>
+        /// <returns>name of the category</returns>
+        public string GetCategoryWhichHasHighestSales(int year)
+        {
+            var startDate = new DateTime(year, 1, 1);
+            var endDate = startDate.AddYears(1);
+
+
+            var maxSales = _context.Ecommerce
+               .Where(s => s.Date >= startDate && s.Date < endDate)
+              .Max(s => s.Price);
+
+            Ecommerce category = _context.Ecommerce.Where(s => s.Price == maxSales).FirstOrDefault();
+
+            return category.ProductCategory;
+        }
     }
 }
 
