@@ -658,3 +658,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore,macos,windows,visualstudio,visualstudiocode
 /EcommerceDataAnalysisToolServer/EcommerceDataAnalysisToolServer/appsettings.json
+/EcommerceDataAnalysisToolServer/EcommerceDataAnalysisToolServer/appsettings.Development.json

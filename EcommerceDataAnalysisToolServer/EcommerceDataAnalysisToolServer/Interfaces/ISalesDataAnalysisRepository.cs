@@ -20,6 +20,8 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         double GetTotalSales();
         double GetAverageSalesForMonth(int month, int year);
 
+        string GetFilterBaseOnYear(int year);
+
     }
 
 }
