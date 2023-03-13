@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Repository;
@@ -242,7 +242,6 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             string data = _salesDataAnalysisRepository.GetFilterBaseOnYear(year);
             return Ok(data);
         }
-
 
     }
 }

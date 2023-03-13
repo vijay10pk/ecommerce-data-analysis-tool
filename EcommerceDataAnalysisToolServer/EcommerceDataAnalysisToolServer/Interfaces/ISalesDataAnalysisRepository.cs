@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EcommerceDataAnalysisToolServer.Models;
 namespace EcommerceDataAnalysisToolServer.Interfaces
 {

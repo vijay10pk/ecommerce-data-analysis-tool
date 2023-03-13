@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Data;
 using EcommerceDataAnalysisToolServer.Interfaces;
@@ -228,7 +228,6 @@ namespace EcommerceDataAnalysisToolServer.Repository
                                     .Sum(s => s.Price);
             return saleInMonth;
         }
-
         public string GetFilterBaseOnYear(int year)
         {
             double TotalRevenue = GetTotalRevenueForYear(year);
