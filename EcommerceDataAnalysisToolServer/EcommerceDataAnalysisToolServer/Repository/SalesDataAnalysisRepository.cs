@@ -106,6 +106,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
 
             return totalSales;
         }
+
         /// <summary>
         /// Method to get the category which has the highest sales in a year 
         /// </summary>
