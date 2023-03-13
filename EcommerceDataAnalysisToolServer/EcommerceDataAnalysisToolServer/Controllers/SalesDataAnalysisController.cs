@@ -5,7 +5,6 @@ using EcommerceDataAnalysisToolServer.Repository;
 using EcommerceDataAnalysisToolServer.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace EcommerceDataAnalysisToolServer.Controllers
@@ -145,6 +144,17 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             double totalRevenueInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
             return Ok(totalRevenueInYear);
+        }
+        /// <summary>
+        /// Method to get the name of category which has highest sales in a year
+        /// </summary>
+        /// <param name="year">Year for which we want to get the highest sales</param>
+        /// <returns>name of the category</returns>
+        [HttpGet("salesByCategory/{year}")]
+        public IActionResult GetHighestSalesByCategory(int year)
+        {
+            string category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year);
+            return Ok(category);
         }
 
     }
