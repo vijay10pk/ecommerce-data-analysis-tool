@@ -154,6 +154,19 @@ namespace EcommerceDataAnalysisToolServer.Repository
                 seasonAndCategory = "category:  " + category.ProductCategory + "";
             return seasonAndCategory;
         }
+
+        public string GetFilterBaseOnYear(int year)
+        {
+            double TotalRevenue = GetTotalRevenueForYear(year);
+            String GetCategory = GetCategoryWhichHasHighestSales(year, 0);
+            //add code for average sales
+            var avgData = 0;
+            //add code for highest sold product
+            var highestSaledProduct = "";
+           var data = "TotalRevenue:    " + TotalRevenue + "\n" + "category which sold most:  " + GetCategory + "\n" + "category which sold most:" + "\n" + "HighestSoldProduct:";
+
+            return data;
+        }
     }
 }
 

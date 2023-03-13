@@ -157,6 +157,19 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             string category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year, month);
             return Ok(category);
         }
+        /// <summary>
+        /// Method to get the data based on year
+        ///
+        /// </summary>
+        /// <param name="year">Year for which we want to get the highest sales,
+        /// highest sold product, total revenue</param>
+        /// <returns>sales summary</returns>
+        [HttpGet("DataBasedOnYear/{year}")]
+        public IActionResult GetFilterBaseOnYear(int year)
+        {
+            string data = _salesDataAnalysisRepository.GetFilterBaseOnYear(year);
+            return Ok(data);
+        }
 
 
     }
