@@ -199,6 +199,19 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             return Ok(highestSoldProduct);
         }
 
+        /// <summary>
+        /// Method to get the average sales in a year
+        /// </summary>
+        /// <param name="year">Year for which we want to get average sale</param>
+        /// <returns>Average sales of the year</returns>
+        [HttpGet("averageSales/{year}")]
+        public IActionResult GetAverageSalesForYear(int year)
+        {
+            double totalSalesInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
+            double getTotalSales = _salesDataAnalysisRepository.GetTotalSales();
+            double averageSaleInYear = (totalSalesInYear / getTotalSales);
+            return Ok(averageSaleInYear);
+        }
 
     }
 }

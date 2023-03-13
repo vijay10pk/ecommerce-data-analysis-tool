@@ -203,6 +203,17 @@ namespace EcommerceDataAnalysisToolServer.Repository
                                     .ToListAsync();
         }
 
+        /// <summary>
+        /// Method to get the total sale 
+        /// </summary>
+        /// <returns>return the total sale amount from the DB</returns>
+        public double GetTotalSales()
+        {
+            var totalSales = _context.Ecommerce
+                .Sum(s => s.Price);
+
+            return totalSales;
+        }
     }
 }
 
