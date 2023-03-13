@@ -139,7 +139,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         /// </summary>
         /// <param name="year">Year for which we want to get total revenue</param>
         /// <returns>Total revenue of the year</returns>
-        [HttpGet("sales/{year}")]
+        [HttpGet("total-revenue/{year}")]
         public IActionResult GetTotalRevenueForYear(int year)
         {
             double totalRevenueInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
@@ -156,6 +156,47 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             string category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year, month);
             return Ok(category);
+        }
+
+        /// <summary>
+        /// GET the most sold product in a year
+        /// </summary>
+        /// <param name="year">Year</param>
+        /// <returns>highest sold product in that year</returns>
+        [HttpGet("highestsoldproduct/{year}")]
+        public async Task<ActionResult<Ecommerce>> GetHighestSoldProductForYear(int year)
+        {
+            var result = await _salesDataAnalysisRepository.GetHighestSoldProductForYear(year);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// GET most sold product in a selected month for given year
+        /// </summary>
+        /// <param name="month">Month in MM format</param>
+        /// <param name="year">Year in YYYY format</param>
+        /// <returns>most sold product in the selected month</returns>
+        [HttpGet("highest-sold-product-in-month")]
+        public async Task<ActionResult<string>> GetHighestSoldProductForMonthAndYear(int month, int year)
+        {
+            var sales = await _salesDataAnalysisRepository.GetSalesForMonthAndYearAsync(month, year);
+            var highestSoldProduct = sales.GroupBy(s => s.ProductName)
+                                          .OrderByDescending(g => g.Count())
+                                          .Select(g => g.Key)
+                                          .FirstOrDefault();
+
+            if (highestSoldProduct == null)
+            {
+                return NotFound("This month doesn't have highest sold product");
+            }
+
+            return Ok(highestSoldProduct);
         }
 
 

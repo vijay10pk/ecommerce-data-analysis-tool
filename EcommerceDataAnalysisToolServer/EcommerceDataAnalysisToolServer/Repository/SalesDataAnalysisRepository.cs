@@ -3,6 +3,9 @@ using EcommerceDataAnalysisToolServer.Models;
 using EcommerceDataAnalysisToolServer.Data;
 using EcommerceDataAnalysisToolServer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Options;
+using System.Runtime.CompilerServices;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -154,6 +157,52 @@ namespace EcommerceDataAnalysisToolServer.Repository
                 seasonAndCategory = "category:  " + category.ProductCategory + "";
             return seasonAndCategory;
         }
+
+        /// <summary>
+        /// Method that get most sold product in a year
+        /// </summary>
+        /// <param name="year">year in YYYY format</param>
+        /// <returns>most sold product in given year</returns>
+        public async Task<Ecommerce> GetHighestSoldProductForYear(int year)
+        {
+
+            var startDate = new DateTime(year, 1, 1);
+            var endDate = startDate.AddYears(1);
+            var query = _context.Ecommerce
+                .Where(s => s.Date >= startDate && s.Date < endDate)
+                .GroupBy(x => x.ProductName)
+                .Select(g => new
+                {
+                    ProductName = g.Key,
+                    TotalPrice = g.Sum(x => x.Price)
+                })
+                .OrderByDescending(x => x.TotalPrice)
+                .FirstOrDefault();
+
+            if (query == null)
+            {
+                return null;
+            }
+
+            var result = await _context.Ecommerce
+                .FirstOrDefaultAsync(x => x.ProductName == query.ProductName);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Method that get most sold product in a month for the given year
+        /// </summary>
+        /// <param name="month">month in MM format</param>
+        /// <param name="year">year in MM format</param>
+        /// <returns>most sold product in a month</returns>
+        public async Task<List<Ecommerce>> GetSalesForMonthAndYearAsync(int month, int year)
+        {
+            return await _context.Set<Ecommerce>()
+                                    .Where(s => s.Date.Year == year && s.Date.Month == month)
+                                    .ToListAsync();
+        }
+
     }
 }
 
