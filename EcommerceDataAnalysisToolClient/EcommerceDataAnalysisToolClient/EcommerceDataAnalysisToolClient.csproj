@@ -11,4 +11,10 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\EcommerceDataAnalysisTool\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\EcommerceDataAnalysisTool\" />
+  </ItemGroup>
 </Project>
