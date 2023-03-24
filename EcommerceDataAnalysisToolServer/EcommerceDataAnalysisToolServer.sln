@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1705.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceDataAnalysisToolServer", "EcommerceDataAnalysisToolServer\EcommerceDataAnalysisToolServer.csproj", "{3B60BD59-D99D-4F3F-B476-725A07547A4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceDataAnalysisToolClient", "..\EcommerceDataAnalysisToolClient\EcommerceDataAnalysisToolClient\EcommerceDataAnalysisToolClient.csproj", "{C03ECF48-2087-41BD-BAF6-D75BFE3F0DEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3B60BD59-D99D-4F3F-B476-725A07547A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B60BD59-D99D-4F3F-B476-725A07547A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B60BD59-D99D-4F3F-B476-725A07547A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03ECF48-2087-41BD-BAF6-D75BFE3F0DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03ECF48-2087-41BD-BAF6-D75BFE3F0DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03ECF48-2087-41BD-BAF6-D75BFE3F0DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03ECF48-2087-41BD-BAF6-D75BFE3F0DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
