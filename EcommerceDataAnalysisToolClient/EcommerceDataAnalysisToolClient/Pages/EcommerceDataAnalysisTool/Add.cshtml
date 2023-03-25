@@ -1,0 +1,43 @@
+﻿@* Razor Page for Creating*@
+@page
+@model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.AddModel
+@{ }
+
+<br>
+<h2>Create sales data</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div>@Model.errorMessage</div>
+}
+<form method="POST">
+    <table>
+        <tr>
+            <td>Date</td>
+            <td><input type="date" name="date" value="@Model.ecommerce.Date"></td>
+        </tr>
+        <tr>
+            <td>Product name</td>
+            <td><input type="text" name="product name" value="@Model.ecommerce.ProductName"></td>
+        </tr>
+        <tr>
+            <td>Product Category</td>
+            <td><input type="text" name="product category<" value="@Model.ecommerce.ProductCategory"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="number" name="price" value="@Model.ecommerce.Price"></td>
+        </tr>
+        <tr>
+            <td>Brand</td>
+            <td><input type="text" name="brand" value="@Model.ecommerce.Brand"></td>
+        </tr>
+    </table>
+    <p></p>
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div>@Model.successMessage.</div>
+    }
+    <input type="submit" value="Add" class="btn btn-primary" />
+</form>
