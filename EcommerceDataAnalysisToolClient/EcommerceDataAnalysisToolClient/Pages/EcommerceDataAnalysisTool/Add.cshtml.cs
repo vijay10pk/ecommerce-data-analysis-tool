@@ -30,13 +30,14 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 
                 using (var client = new HttpClient())
                 {
+                    //HTTP POST
                     client.BaseAddress = new Uri("https://localhost:7267/");
                     var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                     var result = await client.PostAsync("/SalesDataAnalysis", content);
                     string resultContent = await result.Content.ReadAsStringAsync();
                     Console.WriteLine(resultContent);
-              
 
+                    //declaration of result
                     if (!result.IsSuccessStatusCode)
                     {
                         errorMessage = "Error adding";
