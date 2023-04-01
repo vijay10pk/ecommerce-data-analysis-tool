@@ -77,7 +77,6 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// <returns>true if new data has been updated or false if new data is not updated</returns>
         public bool EditSalesData(Ecommerce updatedSaleData)
         {
-            updatedSaleData.Date = DateTime.UtcNow;
             _context.Update(updatedSaleData);
             return Save();
         }

@@ -1,0 +1,49 @@
+﻿@page
+@model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.EditSalesDataModel
+
+<div class="card">
+    <h2>Edit Sales Data</h2>
+
+    @if (!string.IsNullOrEmpty(Model.errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.errorMessage
+        </div>
+    }
+
+    <form method="POST" class="form">
+        <input type="hidden" name="id" value="@Model.sales.Id" />
+        <table>
+            <tr>
+                <td>Date</td>
+                <td><input type="text" name="date" value="@Model.sales.Date"></td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td><input type="text" name="productName" value="@Model.sales.ProductName"></td>
+            </tr>
+            <tr>
+                <td>Product Category</td>
+                <td><input type="text" name="productCategory" value="@Model.sales.ProductCategory"></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" name="price" value="@Model.sales.Price"></td>
+            </tr>
+            <tr>
+                <td>Brand</td>
+                <td><input type="text" name="brand" value="@Model.sales.Brand"></td>
+            </tr>
+        </table>
+        <p></p>
+
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.successMessage))
+    {
+        <div class="alert alert-success" role="alert">
+            @Model.successMessage
+        </div>
+    }
+</div>

@@ -16,3 +16,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card {
+    background-color: #fff;
+    color: #333;
+    border-radius: 15px;
+    padding: 40px 50px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.card form {
+    margin: auto;
+    }
