@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.Extensions.FileProviders;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -15,6 +17,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+//app.UseStaticFiles(new StaticFileOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(
+//                            Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images")),
+//    RequestPath = new PathString("/wwwroot/images")
+//});
 
 app.UseRouting();
 
@@ -23,4 +31,3 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-

@@ -16,8 +16,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\EcommerceDataAnalysisTool\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
   </ItemGroup>
 </Project>
