@@ -35,3 +35,11 @@ body {
 .card form {
     margin: auto;
     }
+
+.button-group button {
+    display: grid;
+    padding: 20px;
+    margin: 4px;
+    width: 100%;
+    border-radius: 10px;
+}

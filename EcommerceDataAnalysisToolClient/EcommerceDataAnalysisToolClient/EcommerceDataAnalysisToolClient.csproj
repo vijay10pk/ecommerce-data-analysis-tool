@@ -13,11 +13,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Pages\EcommerceDataAnalysisTool\" />
+    <None Remove="Pages\Shared\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\EcommerceDataAnalysisTool\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\Shared\logo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>
