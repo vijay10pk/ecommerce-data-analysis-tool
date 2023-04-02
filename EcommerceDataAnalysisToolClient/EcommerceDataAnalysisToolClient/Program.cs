@@ -16,12 +16,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(new StaticFileOptions()
-{
-    FileProvider = new PhysicalFileProvider(
-                            Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images")),
-    RequestPath = new PathString("/wwwroot/images")
-});
+app.UseStaticFiles();
+//app.UseStaticFiles(new StaticFileOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(
+//                            Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images")),
+//    RequestPath = new PathString("/wwwroot/images")
+//});
 
 app.UseRouting();
 
