@@ -120,7 +120,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         /// <param name="id">sales data id</param>
         /// <returns>success or failure response</returns>
         [HttpDelete("{id}")]
-        public IActionResult DeleteSalesData(int id)
+        public IActionResult DeleteSalesData([FromRoute] int id)
         {
             bool deleted = _salesDataAnalysisRepository.DeleteSalesData(id);
 
