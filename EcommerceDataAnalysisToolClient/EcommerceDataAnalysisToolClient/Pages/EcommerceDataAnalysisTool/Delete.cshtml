@@ -1,0 +1,52 @@
+﻿@*Razor page for delete a particular bill data*@
+@page
+@model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.DeleteModel
+@{
+}
+
+<div class="card">
+    <h2>Delete Sales Data</h2>
+
+    @if (!string.IsNullOrEmpty(Model.errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.errorMessage
+        </div>
+    }
+
+    <form method="POST" class="form">
+        <input type="hidden" name="id" value="@Model.sales.Id" />
+        <table>
+            <tr>
+                <td>Date</td>
+                <td>@Model.sales.Date</td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td>@Model.sales.ProductName</td>
+            </tr>
+            <tr>
+                <td>Product Category</td>
+                <td>@Model.sales.ProductCategory</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>@Model.sales.Price</td>
+            </tr>
+            <tr>
+                <td>Brand</td>
+                <td>@Model.sales.Brand</td>
+            </tr>
+        </table>
+        <p></p>
+
+        <input type="submit" value="Delete" class="btn btn-primary" />
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.successMessage))
+    {
+        <div class="alert alert-success" role="alert">
+            @Model.successMessage
+        </div>
+    }
+</div>
