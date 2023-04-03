@@ -9,6 +9,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
     public class TotalRevenueModel : PageModel
     {
+
         //Getter and setter for year and total revenue
         public decimal? Revenue { get; private set; }
         [BindProperty(SupportsGet = true)]
