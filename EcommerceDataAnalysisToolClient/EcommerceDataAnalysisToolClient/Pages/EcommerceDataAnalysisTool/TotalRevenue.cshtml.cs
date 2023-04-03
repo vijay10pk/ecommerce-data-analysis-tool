@@ -4,19 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+//This class handles API call for getting total revenue for the given year
 namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
     public class TotalRevenueModel : PageModel
     {
-        //private readonly HttpClient _httpClient;
-
-        //public TotalRevenueModel(HttpClient httpClient)
-        //{
-        //    _httpClient = httpClient;
-        //}
-
+        //Getter and setter for year and total revenue
+        
         public decimal? Revenue { get; private set; }
-
         [BindProperty(SupportsGet = true)]
         public int? Year { get; set; }
 
@@ -26,6 +21,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
             {
                 try
                 {
+                    //GET total revenue for the selected year
                     using (var client = new HttpClient())
                     {
                         client.BaseAddress = new Uri("http://localhost:7266");
@@ -35,6 +31,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                         Revenue = decimal.Parse(responseContent);
                     }
                 }
+                //Handles exception
                 catch (HttpRequestException)
                 {
                     ModelState.AddModelError(string.Empty, $"Error getting total revenue for {Year}");
