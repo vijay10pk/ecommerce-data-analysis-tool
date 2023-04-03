@@ -10,11 +10,13 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
     public class TotalRevenueModel : PageModel
     {
         //Getter and setter for year and total revenue
-        
         public decimal? Revenue { get; private set; }
         [BindProperty(SupportsGet = true)]
         public int? Year { get; set; }
 
+        /// <summary>
+        /// Get Total revenue for that particular year
+        /// </summary>
         public async Task<IActionResult> OnPostAsync()
         {
             if (Year.HasValue)
