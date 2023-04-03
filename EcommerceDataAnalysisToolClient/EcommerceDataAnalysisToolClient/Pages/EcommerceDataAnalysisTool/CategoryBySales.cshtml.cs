@@ -15,6 +15,9 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 
         public string category = "";
         public CategoryData cd = new CategoryData();
+        //adding below values to show the user given values in web page
+        public string givenYear = "";
+        public string givenmonth = "";
         /// <summary>
         /// calling get API
         /// </summary>
@@ -23,7 +26,11 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         {
             string year = Request.Query["year"];
             string month = Request.Query["month"];
+            //assigning vlaues with the user request
+            givenYear = year;
+            givenmonth = month;
 
+            if (year == null || year == "") { year = "2015"; }
             using (var client = new HttpClient())
             {
                 //connection to API

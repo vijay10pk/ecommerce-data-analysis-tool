@@ -11,7 +11,8 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
     {
         public string category = "";
         public CategoryData cd = new CategoryData();
-
+        //added variable to show user requested year in the web page
+        public string givenYear = "";
         /// <summary>
         /// on get call to API
         /// </summary>
@@ -19,19 +20,15 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         public async Task<IActionResult> OnGet()
         {
             string year = Request.Query["year"];
-
+            //assigning user sent value to variable
+            givenYear = year;
+            if (year == null || year == "") { year = "2015"; }
 
             using (var client = new HttpClient())
             {
                 //making connection
                 client.BaseAddress = new Uri("https://localhost:7266");
                 var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/DataBasedOnYear/{year}");
-
-
-
-
-
-
 
                 if (response.IsSuccessStatusCode)
                 {
