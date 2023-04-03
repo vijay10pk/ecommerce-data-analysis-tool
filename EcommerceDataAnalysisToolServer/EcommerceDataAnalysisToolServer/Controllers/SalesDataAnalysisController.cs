@@ -182,7 +182,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         /// <param name="month">Month in MM format</param>
         /// <param name="year">Year in YYYY format</param>
         /// <returns>most sold product in the selected month</returns>
-        [HttpGet("highest-sold-product-in-month")]
+        [HttpGet("highest-sold-product-in-month/{month}/{year}")]
         public async Task<ActionResult<string>> GetHighestSoldProductForMonthAndYear(int month, int year)
         {
             var sales = await _salesDataAnalysisRepository.GetSalesForMonthAndYearAsync(month, year);
