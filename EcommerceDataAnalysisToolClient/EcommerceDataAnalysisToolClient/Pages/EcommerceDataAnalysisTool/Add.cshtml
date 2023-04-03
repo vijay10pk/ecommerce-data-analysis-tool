@@ -3,6 +3,7 @@
 @model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.AddModel
 @{ }
 
+<div class="card">
 <br>
 <h2>Create sales data</h2>
 
@@ -37,3 +38,10 @@
     }
     <input type="submit" value="Add" class="btn btn-primary" />
 </form>
+@if (!string.IsNullOrEmpty(Model.successMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @Model.successMessage
+    </div>
+}
+</div>
