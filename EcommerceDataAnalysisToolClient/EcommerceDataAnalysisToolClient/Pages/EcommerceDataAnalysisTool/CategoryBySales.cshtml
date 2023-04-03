@@ -16,7 +16,8 @@
     </form>
 
     <div id="yearBlock" style="display: block;">
-        <form method="get" action="" class="form" id="category-form">
+        <form method="get" action="" class="form" id="year-form">
+            <!-- Modified the id attribute value -->
             <div class="form-group">
                 <label for="year">Select a year:</label>
                 <select class="form-control" id="year" name="year">
@@ -34,32 +35,30 @@
 
     <div id="monthBlock" style="display: none;">
         <!-- Block content for month -->
-        <div class="form-group">
-            <label for="year">Select a year:</label>
-            <select class="form-control" id="year" name="year">
-                <option value="">--Select Year--</option>
-                @for (int i = DateTime.Now.Year; i > 2014; i--)
-                {
-                    <option value="@i">@i</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="month">Select a month:</label>
-            <select class="form-control" id="month" name="month">
-                <option value="">--Select Month--</option>
-                @for (int i = 1; i <= 12; i++)
-                {
-                    <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
-                }
-            </select>
-        </div>
-        <div>
-            <form method="get" action="" class="form" id="category-form">
-                <input type="submit" value="get Summary" class="btn btn-primary" />
-            </form>
-            <p>Displaying data for the month.</p>
-        </div>
+        <form method="get" action="" class="form" id="category-form">
+            <div class="form-group">
+                <label for="year">Select a year:</label>
+                <select class="form-control" id="year" name="year">
+                    <option value="">--Select Year--</option>
+                    @for (int i = DateTime.Now.Year; i > 2014; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="month">Select a month:</label>
+                <select class="form-control" id="month" name="month">
+                    <option value="">--Select Month--</option>
+                    @for (int j = 1; j <= 12; j++)
+                    {
+                        <option value="@j">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(j)</option>
+                    }
+                </select>
+            </div>
+            <input type="submit" value="get Summary" class="btn btn-primary" />
+        </form>
+        <p>Displaying data for the month.</p>
     </div>
 
     <script>
@@ -80,7 +79,7 @@
 
 @if (!string.IsNullOrEmpty(Model.category))
 {
-    <p>The category with the highest sales is: @Model.category</p>
+    <p>The category with the highest sales in year @Model.givenYear and month  @Model.givenmonth is: @Model.category</p>
 }
 else
 {

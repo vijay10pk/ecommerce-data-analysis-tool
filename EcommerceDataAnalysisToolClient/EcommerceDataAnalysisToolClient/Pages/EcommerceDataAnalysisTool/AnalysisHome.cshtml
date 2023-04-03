@@ -21,7 +21,7 @@
         <h1>@ViewData["Title"]</h1>
         @if (!string.IsNullOrEmpty(Model.category))
         {
-            <p>The category with the highest sales is: @Model.category</p>
+            <p>The category with the highest sales in year @Model.givenYear is: @Model.category</p>
         }
         else
         {
