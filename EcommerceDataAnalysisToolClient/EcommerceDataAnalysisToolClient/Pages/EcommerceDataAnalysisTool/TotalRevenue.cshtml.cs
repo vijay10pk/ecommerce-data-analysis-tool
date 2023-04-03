@@ -8,18 +8,16 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
     public class TotalRevenueModel : PageModel
     {
-        //private readonly HttpClient _httpClient;
-
-        //public TotalRevenueModel(HttpClient httpClient)
-        //{
-        //    _httpClient = httpClient;
-        //}
+  
 
         public decimal? Revenue { get; private set; }
 
         [BindProperty(SupportsGet = true)]
         public int? Year { get; set; }
 
+        /// <summary>
+        /// Get Total revenue for that particular year
+        /// </summary>
         public async Task<IActionResult> OnPostAsync()
         {
             if (Year.HasValue)
