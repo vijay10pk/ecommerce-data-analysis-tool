@@ -1,0 +1,41 @@
+﻿@page
+@model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.TotalRevenueModel
+@{
+}
+<div class="card">
+    <h2>Total Revenue</h2>
+
+    <form method="POST" class="form">
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group">
+                    <select class="form-control text-center" id="year" name="Year">
+                        <option value="">--Select a Year--</option>
+                        @for (int i = 2016; i >= 2014 && i <= 2016; i--)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary">Submit </button>
+            </div>
+        </div>
+    </form>
+    @if (Model.Revenue.HasValue)
+    {
+        <div class="card border-success mx-auto mb-3" style="max-width: 18rem;">
+            <div class="card-header text-center">Total Revenue for @Model.Year</div>
+            <div class="card-body text-success text-center">
+                <h2 class="card-title">@Model.Revenue</h2>
+            </div>
+        </div>
+    }
+    else if (Model.Year.HasValue)
+    {
+        <div class="alert alert-danger" role="alert">
+            Error getting total revenue for @Model.Year.
+        </div>
+    }
+
