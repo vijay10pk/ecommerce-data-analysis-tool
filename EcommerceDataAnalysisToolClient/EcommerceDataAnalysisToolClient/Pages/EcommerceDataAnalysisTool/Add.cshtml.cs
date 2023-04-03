@@ -16,7 +16,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         public string errorMessage = "";
         public string successMessage = "";
 
-        public async void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {       
             ecommerce.ProductName = Request.Form["productName"];
             ecommerce.ProductCategory = Request.Form["productCategory"];
@@ -48,6 +48,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                         successMessage = "Successfully added";
                     }
                 }
+            return Page();
             
         }
     }
