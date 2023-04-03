@@ -19,9 +19,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         /// <summary>
         /// Get the average sales of the particular year
         /// </summary>
-        public async Task<IActionResult> OnPostAsync()
-        {
-           if (Year.HasValue)
+       
 
         public async Task<IActionResult> OnPostAsync()
         {
