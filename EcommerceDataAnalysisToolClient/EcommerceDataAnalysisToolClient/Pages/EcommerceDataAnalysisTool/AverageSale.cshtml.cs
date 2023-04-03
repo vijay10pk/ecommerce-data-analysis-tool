@@ -15,17 +15,25 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         [BindProperty(SupportsGet = true)]
         public int? Year { get; set; }
 
+
         /// <summary>
         /// Get the average sales of the particular year
         /// </summary>
         public async Task<IActionResult> OnPostAsync()
         {
            if (Year.HasValue)
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            
+            if (Year.HasValue)
+
             {
                 try
                 {
                     using (var client = new HttpClient())
                     {
+
                         //HTTP GET
                         client.BaseAddress = new Uri("http://localhost:7266");
                         var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/averageSales/{Year}");

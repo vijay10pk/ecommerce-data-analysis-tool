@@ -1,7 +1,32 @@
 ﻿@page
 @model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.AnalysisHomeModel
 <div class="card">
-    <h2><i class="fa-solid fa-chart-pie"></i>Sales Data Analysis</h2></i>
+
+    <button type="button" class="btn btn-dark" href="">
+        <h2><i class="fa-solid fa-chart-pie"></i>Sales Data Analysis</h2></i>
+        <h2><i class="fa-solid fa-chart-pie"></i>Sales Data Analysis</h2></i>
+        <form method="get" action="" class="form" id="category-form">
+            <div class="form-group">
+                <label for="year">Select a year:</label>
+                <select class="form-control" id="year" name="year">
+                    <option value="">--Select Year--</option>
+                    @for (int i = DateTime.Now.Year; i >= 2014; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+            <input type="submit" value="get Summary" class="btn btn-primary" />
+        </form>
+        <h1>@ViewData["Title"]</h1>
+        @if (!string.IsNullOrEmpty(Model.category))
+        {
+            <p>The category with the highest sales in year @Model.givenYear is: @Model.category</p>
+        }
+        else
+        {
+            <p>No category found.</p>
+        }
 </div>
 <div class="card">
     <div class="button-group">
@@ -24,7 +49,7 @@
                 </button>
             </div>
             <div class="col-3">
-                <button type="button" class="btn btn-dark" href="">
+                <button type="button" class="btn btn-dark" onclick="window.location.href='CategoryBySales';">
                     <i class="fa-solid fa-sitemap" style=" font-size: 100px;"></i>Sales by Category
                 </button>
             </div>
