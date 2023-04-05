@@ -21,10 +21,6 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         /// </summary>
         public async Task<IActionResult> OnPostAsync()
         {
-           if (Year.HasValue)
-
-        public async Task<IActionResult> OnPostAsync()
-        {
             
             if (Year.HasValue)
 
