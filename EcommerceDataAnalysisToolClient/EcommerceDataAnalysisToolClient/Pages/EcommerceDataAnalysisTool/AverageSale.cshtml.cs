@@ -29,7 +29,6 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 {
                     using (var client = new HttpClient())
                     {
-
                         //HTTP GET
                         client.BaseAddress = new Uri("http://localhost:7266");
                         var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/averageSales/{Year}");
