@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -218,7 +219,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// Method to get the sales in the particular month of the given year
         /// </summary>
         /// <param name="month">month in MM format</param>
-        /// <param name="year">year in MM format</param>
+        /// <param name="year">year in YYYY format</param>
         /// <returns>sales from the particular month of the given year</returns>
         public double GetAverageSalesForMonth(int month, int year)
         {
@@ -227,19 +228,30 @@ namespace EcommerceDataAnalysisToolServer.Repository
                                     .Sum(s => s.Price);
             return saleInMonth;
         }
+        /// <summary>
+        /// Method to get all the sales data summary for the given year
+        /// </summary>
+        /// <param name="year">year in YYYY format</param>
+        /// <returns>Sales data summary</returns>
         public string GetFilterBaseOnYear(int year)
         {
-            double TotalRevenue = GetTotalRevenueForYear(year);
-            String GetCategory = GetCategoryWhichHasHighestSales(year, 0);
-            //add code for average sales
+            double totalRevenue = GetTotalRevenueForYear(year);
+            string categoryWithHighestSales = GetCategoryWhichHasHighestSales(year, 0);
             double totalSalesInYear = GetTotalRevenueForYear(year);
-            double getTotalSales = GetTotalSales();
-            double averageSaleInYear = (totalSalesInYear / getTotalSales);
-            //add code for highest sold product
-           // Task<Ecommerce> highestSaledProduct = GetHighestSoldProductForYear(year);
-            var data = "TotalRevenue:    " + TotalRevenue + "\n" + "category which sold most:  " + GetCategory + "\n" + "average sale in the year: " + averageSaleInYear + "";
+            double totalSales = GetTotalSales();
+            string averageSaleInYear = (totalSalesInYear / totalSales).ToString("0.00");
 
-            return data;
+            // add code for highest sold product
+            // Task<Ecommerce> highestSaledProduct = GetHighestSoldProductForYear(year);
+
+            var data = new
+            {
+                TotalRevenue = totalRevenue,
+                CategoryWithHighestSales = categoryWithHighestSales,
+                AverageSaleInYear = averageSaleInYear
+            };
+
+            return JsonConvert.SerializeObject(data);
         }
     }
 }
