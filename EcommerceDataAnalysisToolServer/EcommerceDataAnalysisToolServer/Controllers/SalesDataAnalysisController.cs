@@ -154,7 +154,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         [HttpGet("salesByCategory/{year}")]
         public IActionResult GetHighestSalesByCategory(int year, int month)
         {
-            string category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year, month);
+            CategoryData category = _salesDataAnalysisRepository.GetCategoryWhichHasHighestSales(year, month);
             return Ok(category);
         }
 

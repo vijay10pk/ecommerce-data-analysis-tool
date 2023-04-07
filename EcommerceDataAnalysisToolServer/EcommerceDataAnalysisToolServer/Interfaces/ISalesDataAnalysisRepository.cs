@@ -14,7 +14,7 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         bool EditSalesData(Ecommerce updateSaleData);
         bool DeleteSalesData(int id);
         double GetTotalRevenueForYear(int year);
-        string GetCategoryWhichHasHighestSales(int year, int month);
+        CategoryData GetCategoryWhichHasHighestSales(int year, int month);
         Task<Ecommerce> GetHighestSoldProductForYear(int year);
         Task<List<Ecommerce>> GetSalesForMonthAndYearAsync(int month, int year);
         double GetTotalSales();
