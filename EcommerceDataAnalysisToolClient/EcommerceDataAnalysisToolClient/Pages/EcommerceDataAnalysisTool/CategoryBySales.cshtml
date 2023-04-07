@@ -77,9 +77,19 @@
 </div>
 <h1>@ViewData["Title"]</h1>
 
-@if (!string.IsNullOrEmpty(Model.category))
+@if (!string.IsNullOrEmpty(Model.CategoryWithHighestSales.category))
 {
-    <p>The category with the highest sales in year @Model.givenYear and month  @Model.givenmonth is: @Model.category</p>
+    @if (Model.CategoryWithHighestSales.season != null && Model.CategoryWithHighestSales.season != "")
+    {
+        <p>The category with the highest sales in year @Model.givenYear and month  @Model.givenmonth is: @Model.CategoryWithHighestSales.category</p>
+        <p>You have selected @Model.CategoryWithHighestSales.season season</p>
+
+
+}
+    else
+    {
+        <p>The category with the highest sales in year @Model.givenYear and month  @Model.givenmonth is: @Model.CategoryWithHighestSales.category</p>
+    }
 }
 else
 {

@@ -115,12 +115,12 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// </summary>
         /// <param name="year">Year</param>
         /// <returns>name of the category</returns>
-        public string GetCategoryWhichHasHighestSales(int year, int month)
+        public CategoryData GetCategoryWhichHasHighestSales(int year, int month)
         {
             var startDate = new DateTime();
             var endDate = new DateTime();
             var season = "";
-            String seasonAndCategory = "";
+            CategoryData seasonAndCategory = new CategoryData();
 
             if (month > 0)
             {
@@ -151,10 +151,10 @@ namespace EcommerceDataAnalysisToolServer.Repository
               .Max(s => s.Price);
 
             Ecommerce category = _context.Ecommerce.Where(s => s.Price == maxSales).FirstOrDefault();
+            seasonAndCategory.category = category.ProductCategory;
             if (season != "")
-                seasonAndCategory = "season has highest sale in the year:    " + season + "\n" + "category:  " + category.ProductCategory + "";
-            else
-                seasonAndCategory = "category:  " + category.ProductCategory + "";
+                seasonAndCategory.season = season;
+           
             return seasonAndCategory;
         }
 
@@ -236,7 +236,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
         public string GetFilterBaseOnYear(int year)
         {
             double totalRevenue = GetTotalRevenueForYear(year);
-            string categoryWithHighestSales = GetCategoryWhichHasHighestSales(year, 0);
+            CategoryData categoryWithHighestSales = GetCategoryWhichHasHighestSales(year, 0);
             double totalSalesInYear = GetTotalRevenueForYear(year);
             double totalSales = GetTotalSales();
             string averageSaleInYear = (totalSalesInYear / totalSales).ToString("0.00");
