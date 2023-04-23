@@ -374,6 +374,17 @@ namespace EcommerceDataAnalysisToolServer.Repository
             return results;
         }
 
+        /// <summary>
+        /// Method to search the sales data by product name
+        /// </summary>
+        /// <param name="productName">sales data by productName</param>
+        /// <returns>sales data of the given product name</returns>
+        public IQueryable<Ecommerce> SearchSalesByProductName(string productName)
+        {
+            IQueryable<Ecommerce> ecommerces = _context.Ecommerce.Where(sale => sale.ProductName.StartsWith(productName));
+            return ecommerces;
+        }
+
     }
 
 
