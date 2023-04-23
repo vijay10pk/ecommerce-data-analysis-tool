@@ -243,6 +243,39 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// GetPredictionForRevenue
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("predictionOnRevenue")]
+        public IActionResult GetPredictionForRevenue()
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForRevenue();
+            return Ok(data);
+        }
+
+        /// <summary>
+        /// GetPredictionForCategory
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("predictionOnCategory")]
+        public IActionResult GetPredictionForCategory()
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategory();
+            return Ok(data);
+        }
+        /// <summary>
+        /// GetPredictionForCategoryOnMonth
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        [HttpGet("predictionOnCategoryOnMonth")]
+        public IActionResult GetPredictionForCategoryOnMonth(int year)
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategoryOnMonth(year);
+            return Ok(data);
+        }
+
     }
 }
 
