@@ -275,7 +275,27 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategoryOnMonth(year);
             return Ok(data);
         }
+        /// <summary>
+        /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
+        /// </summary>
+        /// <param name="productName">sales data by productName</param>
+        /// <returns>search sales data for the given productName</returns>
+        [HttpGet("search/{productName}")]
+        [ProducesResponseType(200, Type = typeof(Ecommerce))]
+        [ProducesResponseType(404)]
+        public IActionResult SearchSalesByProductName(string productName)
+        {
+            IQueryable<Ecommerce> sales = _salesDataAnalysisRepository.SearchSalesByProductName(productName);
+            if (sales == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(sales);
+            }
 
+        }
     }
 }
 
