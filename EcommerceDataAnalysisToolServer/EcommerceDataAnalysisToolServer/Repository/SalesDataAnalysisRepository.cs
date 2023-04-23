@@ -384,7 +384,6 @@ namespace EcommerceDataAnalysisToolServer.Repository
             IQueryable<Ecommerce> ecommerces = _context.Ecommerce.Where(sale => sale.ProductName.StartsWith(productName));
             return ecommerces;
         }
-
     }
 
 

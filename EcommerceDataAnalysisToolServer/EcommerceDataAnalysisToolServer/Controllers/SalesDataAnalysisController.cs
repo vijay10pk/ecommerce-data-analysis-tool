@@ -275,7 +275,6 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategoryOnMonth(year);
             return Ok(data);
         }
-
         /// <summary>
         /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
         /// </summary>
@@ -297,8 +296,6 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             }
 
         }
-
-
     }
 }
 

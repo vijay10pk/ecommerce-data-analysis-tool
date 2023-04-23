@@ -29,7 +29,6 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         CategoryData GetPredictionForRevenue();
 
         IQueryable<Ecommerce> SearchSalesByProductName(String productName);
-
     }
 
 }
