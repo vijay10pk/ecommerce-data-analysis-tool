@@ -22,6 +22,13 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
 
         string GetFilterBaseOnYear(int year);
 
+        CategoryData GetPredictionForCategory();
+
+        CategoryData GetPredictionForCategoryOnMonth(int year);
+
+        CategoryData GetPredictionForRevenue();
+
+        IQueryable<Ecommerce> SearchSalesByProductName(String productName);
     }
 
 }

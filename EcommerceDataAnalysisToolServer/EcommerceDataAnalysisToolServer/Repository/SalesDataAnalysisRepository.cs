@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -253,6 +254,138 @@ namespace EcommerceDataAnalysisToolServer.Repository
 
             return JsonConvert.SerializeObject(data);
         }
+
+        /// <summary>
+        /// 
+        /// GetPredictionForCategory
+        /// </summary>
+        /// <returns></returns>
+        public CategoryData GetPredictionForCategory()
+        {
+            CategoryData[] data = new CategoryData[3];
+            CategoryData results = new CategoryData();
+            int year = 2015;
+           
+            for (int i=0;i<3;i++)
+            {
+
+                data[i]=GetCategoryWhichHasHighestSales(year, 0);
+                year++;
+               
+            }
+
+            
+            int n = data.Length;
+            int maxCount = 1;
+            string prediction = data[0].category;
+            int currCount = 1;
+          
+            for (int i = 0; i < n - 1; i++)
+            {
+                currCount = 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (data[i].category == data[j].category)
+                    {
+                        currCount++;
+                    }
+                }
+                if (currCount > maxCount)
+                {
+                    maxCount = currCount;
+                    prediction = data[i].category;
+                }
+            }
+
+            
+           
+            results.predictedCategory = prediction;
+
+            return results;
+        }
+
+        /// <summary>
+        /// GetPredictionForCategoryOnMonth
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public CategoryData GetPredictionForCategoryOnMonth(int year)
+        {
+            CategoryData[] data = new CategoryData[12];
+            CategoryData results = new CategoryData();
+                    
+            int month = 1;
+
+            
+            for (int i = 0; i < 12; i++)
+            {
+
+                data[i] = GetCategoryWhichHasHighestSales(year, month);
+               
+                month++;
+              
+            }
+            int n = data.Length;
+            int maxCount = 1;
+            string prediction = data[0].category;
+            int currCount = 1;
+            for (int i = 0; i < n - 1; i++)
+            {
+                currCount = 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (data[i].category == data[j].category)
+                    {
+                        currCount++;
+                    }
+                }
+                if (currCount > maxCount)
+                {
+                    maxCount = currCount;
+                    prediction = data[i].category;
+                }
+            }
+           
+           
+            results.predictedCategory = prediction;
+
+            return results;
+           }
+
+        /// <summary>
+        /// GetPredictionForRevenue
+        /// </summary>
+        /// <returns></returns>
+        public CategoryData GetPredictionForRevenue()
+        {
+            int year = 2015;
+            CategoryData results = new CategoryData();
+            double[] data = new double[3];
+            double total = 0;
+            for (int i=0;i<3;i++)
+            {
+                data[i] = GetTotalRevenueForYear(year);
+                year++;
+                total = total + data[i];
+            }
+
+            results.predictedRevenue = total / 3;
+
+            return results;
+        }
+
+        /// <summary>
+        /// Method to search the sales data by product name
+        /// </summary>
+        /// <param name="productName">sales data by productName</param>
+        /// <returns>sales data of the given product name</returns>
+        public IQueryable<Ecommerce> SearchSalesByProductName(string productName)
+        {
+            IQueryable<Ecommerce> ecommerces = _context.Ecommerce.Where(sale => sale.ProductName.StartsWith(productName));
+            return ecommerces;
+        }
     }
+
+
 }
 

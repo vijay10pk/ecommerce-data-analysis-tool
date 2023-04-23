@@ -243,6 +243,59 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// GetPredictionForRevenue
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("predictionOnRevenue")]
+        public IActionResult GetPredictionForRevenue()
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForRevenue();
+            return Ok(data);
+        }
+
+        /// <summary>
+        /// GetPredictionForCategory
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("predictionOnCategory")]
+        public IActionResult GetPredictionForCategory()
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategory();
+            return Ok(data);
+        }
+        /// <summary>
+        /// GetPredictionForCategoryOnMonth
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        [HttpGet("predictionOnCategoryOnMonth")]
+        public IActionResult GetPredictionForCategoryOnMonth(int year)
+        {
+            CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategoryOnMonth(year);
+            return Ok(data);
+        }
+        /// <summary>
+        /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
+        /// </summary>
+        /// <param name="productName">sales data by productName</param>
+        /// <returns>search sales data for the given productName</returns>
+        [HttpGet("search/{productName}")]
+        [ProducesResponseType(200, Type = typeof(Ecommerce))]
+        [ProducesResponseType(404)]
+        public IActionResult SearchSalesByProductName(string productName)
+        {
+            IQueryable<Ecommerce> sales = _salesDataAnalysisRepository.SearchSalesByProductName(productName);
+            if (sales == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(sales);
+            }
+
+        }
     }
 }
 
