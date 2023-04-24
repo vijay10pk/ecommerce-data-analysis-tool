@@ -112,6 +112,20 @@ namespace EcommerceDataAnalysisToolServer.Repository
         }
 
         /// <summary>
+        /// Method that calculate total sales count for the given month in the year
+        /// </summary>
+        /// <param name="month">month in MM format</param>
+        /// <param name="year">Year</param>
+        /// <returns>Total Revenue for the given year</returns>
+        public double GetTotalSalesRecordInMonthForYear(int month, int year)
+        {
+            var saleInMonth = _context.Ecommerce
+                                    .Where(s => s.Date.Year == year && s.Date.Month == month)
+                                    .Count();
+            return saleInMonth;
+        }
+
+        /// <summary>
         /// Method to get the category which has the highest sales in a year or month
         /// </summary>
         /// <param name="year">Year</param>
@@ -214,6 +228,22 @@ namespace EcommerceDataAnalysisToolServer.Repository
                 .Sum(s => s.Price);
 
             return totalSales;
+        }
+
+        /// <summary>
+        /// Method to get the total no of records sale 
+        /// </summary>
+        /// <returns>return the total no of sale record for the particular year from the DB</returns>
+        public double GetTotalCountSales(int year)
+        {
+            var startDate = new DateTime(year, 1, 1);
+            var endDate = startDate.AddYears(1);
+
+            var totalSalesCount = _context.Ecommerce
+                .Where(s => s.Date >= startDate && s.Date < endDate)
+                .Count();
+
+            return totalSalesCount;
         }
 
         /// <summary>
