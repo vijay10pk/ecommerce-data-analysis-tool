@@ -8,30 +8,43 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
     public class AverageSaleModel : PageModel
     {
-       
+
 
         public decimal? Average { get; private set; }
 
         [BindProperty(SupportsGet = true)]
         public int? Year { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int? Month { get; set; }
+
 
         /// <summary>
         /// Get the average sales of the particular year
         /// </summary>
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            
+
             if (Year.HasValue)
 
             {
                 try
                 {
+
                     using (var client = new HttpClient())
                     {
                         //HTTP GET
                         client.BaseAddress = new Uri("http://localhost:7266");
-                        var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/averageSales/{Year}");
+                        HttpResponseMessage response = new HttpResponseMessage();
+                        if ((Year.HasValue) && (Month.HasValue == false))
+                        {
+                            response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/averageSales/{Year}");
+                        }
+                        else if (Month.HasValue)
+                        {
+                             response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/averageSales/{Year}/{Month}");
+
+                        }
                         response.EnsureSuccessStatusCode();
                         var responseContent = await response.Content.ReadAsStringAsync();
                         Average = decimal.Parse(responseContent);
