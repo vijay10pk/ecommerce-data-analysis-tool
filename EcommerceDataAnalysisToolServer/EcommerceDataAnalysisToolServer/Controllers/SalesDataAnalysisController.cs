@@ -208,7 +208,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         public IActionResult GetAverageSalesForYear(int year)
         {
             double totalSalesInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
-            double getTotalSales = _salesDataAnalysisRepository.GetTotalSales();
+            double getTotalSales = _salesDataAnalysisRepository.GetTotalCountSales(year);
             double averageSaleInYear = (totalSalesInYear / getTotalSales);
             return Ok(averageSaleInYear);
         }
@@ -223,7 +223,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         public IActionResult GetAverageSalesInAMonth(int month, int year)
         {
             var salesInMonth = _salesDataAnalysisRepository.GetAverageSalesForMonth(month, year);
-            var salesInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
+            var salesInYear = _salesDataAnalysisRepository.GetTotalSalesRecordInMonthForYear(month,year);
             var averageSalesInMonth = (salesInMonth / salesInYear);
 
             return Ok(averageSalesInMonth);
