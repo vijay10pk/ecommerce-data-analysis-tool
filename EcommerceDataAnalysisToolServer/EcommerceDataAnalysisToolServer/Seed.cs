@@ -38,7 +38,7 @@ namespace EcommerceDataAnalysisToolServer
         {
             try
             {
-                using (StreamReader sr = new StreamReader("./Data/ecommerce.csv"))
+                using (StreamReader sr = new StreamReader("./Data/new-ecommerce.csv"))
                 {
                     int c = 0;
                     while (!sr.EndOfStream)

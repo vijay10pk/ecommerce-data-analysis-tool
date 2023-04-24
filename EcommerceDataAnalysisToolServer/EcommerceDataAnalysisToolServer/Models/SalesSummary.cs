@@ -7,7 +7,7 @@ namespace EcommerceDataAnalysisToolServer.Models
         {
         }
 
-        public SalesSummary( double totalRevenue, string category, string averageSales)
+        public SalesSummary( double totalRevenue, CategoryData category, string averageSales)
         {
             TotalRevenue = totalRevenue;
             CategoryWithHighestSales = category;
@@ -15,7 +15,7 @@ namespace EcommerceDataAnalysisToolServer.Models
 
         }
         public double TotalRevenue { get; set; }
-        public string CategoryWithHighestSales { get; set; }
+        public CategoryData CategoryWithHighestSales { get; set; }
         public string AverageSaleInYear { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         [BindProperty(SupportsGet = true)]
         public int? Month { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async void OnPostAsync()
         {
             if (Year.HasValue && Month == null)
             {
@@ -69,7 +69,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                     ModelState.AddModelError(string.Empty, $"Error getting most sold producr for {Month}");
                 }
             }
-            return Page();
+            //return Page();
         }
     }
 }

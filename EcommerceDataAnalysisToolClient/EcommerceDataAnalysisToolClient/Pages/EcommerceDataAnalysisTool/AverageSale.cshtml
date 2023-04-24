@@ -18,47 +18,91 @@
     <div id="yearBlock" style="display: block;">
         <form method="get" action="" class="form" id="year-form">
             <!-- Modified the id attribute value -->
-            <div class="form-group">
-                <label for="year">Select a year:</label>
-                <select class="form-control" id="year" name="year">
-                    <option value="">--Select Year--</option>
-                    @for (int i = DateTime.Now.Year; i >= 2014; i--)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-            </div>
-            <input type="submit" value="get Summary" class="btn btn-primary" />
+            <div class="row d-flex justify-content-center">
+                <div class="col-3">
+                    <div class="form-group">
+                        <select class="form-control" id="year" name="year">
+                            <option value="">--Select Year--</option>
+                            @for (int i = DateTime.Now.Year; i >= 2014; i--)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </div>
         </form>
-        <p>Displaying data for the year.</p>
+        @if (Model.Average.HasValue)
+        {
+            <script>document.querySelector('input[name="option"]:checked').value = "year";
+                document.getElementById("yearBlock").style.display = "block";
+                document.getElementById("monthBlock").style.display = "none";</script>
+            <div class="card border-success mx-auto mb-3" style="max-width: 30rem;">
+                <div class="card-header text-center">Most Sold category for @Model.Year</div>
+                <div class="card-body text-success text-center">
+                    <h2 class="card-title">@Model.Average $ </h2>
+                </div>
+            </div>
+        }
+        else if (Model.Year.HasValue)
+        {
+            <div class="alert alert-danger" role="alert">
+                Error getting average sales for @Model.Year.
+            </div>
+        }
     </div>
 
     <div id="monthBlock" style="display: none;">
         <!-- Block content for month -->
         <form method="get" action="" class="form" id="category-form">
-            <div class="form-group">
-                <label for="year">Select a year:</label>
-                <select class="form-control" id="year" name="year">
-                    <option value="">--Select Year--</option>
-                    @for (int i = DateTime.Now.Year; i > 2014; i--)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="month">Select a month:</label>
-                <select class="form-control" id="month" name="month">
-                    <option value="">--Select Month--</option>
-                    @for (int j = 1; j <= 12; j++)
-                    {
-                        <option value="@j">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(j)</option>
-                    }
-                </select>
-            </div>
-            <input type="submit" value="get Summary" class="btn btn-primary" />
+            <div class="row d-flex justify-content-center">
+                <div class="col-4">
+                    <div class="form-group">
+                        <select class="form-control" id="year" name="year">
+                            <option value="">--Select Year--</option>
+                            @for (int i = DateTime.Now.Year; i > 2014; i--)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <select class="form-control" id="month" name="month">
+                            <option value="">--Select Month--</option>
+                            @for (int j = 1; j <= 12; j++)
+                            {
+                                <option value="@j">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(j)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
         </form>
-        <p>Displaying data for the month.</p>
+        @if (Model.Year.HasValue && Model.Average.HasValue && Model.Month.HasValue)
+        {
+            <script>document.querySelector('input[name="option"]:checked').value = "month";
+                document.getElementById("yearBlock").style.display = "none";
+                document.getElementById("monthBlock").style.display = "block";</script>
+            <div class="card border-success mx-auto mb-3" style="max-width: 30rem;">
+                <div class="card-header text-center">Avaerage Sales for @Model.Month in the year @Model.Year</div>
+                <div class="card-body text-success text-center">
+                    <h2 class="card-title">@Model.Average</h2>
+                </div>
+            </div>
+        }
+        else if (Model.Year.HasValue && Model.Month.HasValue)
+        {
+            <div class="alert alert-danger" role="alert">
+                Error getting Average for @Model.Month.
+            </div>
+        }
     </div>
 
     <script>function showBlock() {
@@ -73,19 +117,4 @@
         }</script>
 
 </div>
-@if (Model.Average.HasValue)
-{
-    <div class="card border-success mx-auto mb-3" style="max-width: 18rem;">
-        <div class="card-header text-center">Average sale for @Model.Year</div>
-        <div class="card-body text-success text-center">
-            <h2 class="card-title">@Model.Average</h2>
-        </div>
-    </div>
-}
-else if (Model.Year.HasValue)
-{
-    <div class="alert alert-danger" role="alert">
-        Error getting Average sale for @Model.Year.
-    </div>
-}
 

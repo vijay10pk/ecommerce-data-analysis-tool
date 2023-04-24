@@ -1,5 +1,7 @@
 using System;
 using EcommerceDataAnalysisToolServer.Models;
+using Newtonsoft.Json.Linq;
+
 namespace EcommerceDataAnalysisToolServer.Interfaces
 {
     /// <summary>
@@ -22,15 +24,16 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         double GetTotalSales();
         double GetAverageSalesForMonth(int month, int year);
 
-        string GetFilterBaseOnYear(int year);
+        Task<SalesSummary> GetFilterBaseOnYear(int year);
 
         CategoryData GetPredictionForCategory();
 
         CategoryData GetPredictionForCategoryOnMonth(int year);
 
         CategoryData GetPredictionForRevenue();
-
+        string GetPredictionData();
         IQueryable<Ecommerce> SearchSalesByProductName(String productName);
+
     }
 
 }
