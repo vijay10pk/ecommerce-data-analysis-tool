@@ -8,7 +8,7 @@
     <h2>Average Sales</h2>
     <form>
         <label>
-            <input type="radio" name="option" value="year" checked onchange="showBlock()"> Year
+            <input type="radio" name="option" value="year" onchange="showBlock()"> Year
         </label>
         <label>
             <input type="radio" name="option" value="month" onchange="showBlock()"> Month
@@ -33,7 +33,7 @@
                 <div class="col-1">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                </div>
+            </div>
         </form>
         @if (Model.Average.HasValue)
         {
@@ -93,7 +93,7 @@
             <div class="card border-success mx-auto mb-3" style="max-width: 30rem;">
                 <div class="card-header text-center">Avaerage Sales for @Model.Month in the year @Model.Year</div>
                 <div class="card-body text-success text-center">
-                    <h2 class="card-title">@Model.Average</h2>
+                    <h2 class="card-title">@Model.Average $</h2>
                 </div>
             </div>
         }

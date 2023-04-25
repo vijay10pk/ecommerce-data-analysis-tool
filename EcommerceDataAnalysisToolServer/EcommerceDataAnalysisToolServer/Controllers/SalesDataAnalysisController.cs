@@ -210,7 +210,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             double totalSalesInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
             double getTotalSales = _salesDataAnalysisRepository.GetTotalCountSales(year);
-            double averageSaleInYear = System.Math.Truncate(totalSalesInYear / getTotalSales);
+            double averageSaleInYear = System.Math.Truncate(totalSalesInYear / 12);
             return Ok(averageSaleInYear);
         }
 
@@ -225,7 +225,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             var salesInMonth = _salesDataAnalysisRepository.GetAverageSalesForMonth(month, year);
             var salesInYear = _salesDataAnalysisRepository.GetTotalSalesRecordInMonthForYear(month,year);
-            var averageSalesInMonth = System.Math.Truncate(salesInMonth / salesInYear);
+            var averageSalesInMonth = System.Math.Truncate(salesInMonth / 30);
 
             return Ok(averageSalesInMonth);
         }
