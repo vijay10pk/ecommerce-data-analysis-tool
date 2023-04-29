@@ -57,11 +57,13 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 string json = System.Text.Json.JsonSerializer.Serialize<Ecommerce>(sales, opt);
                 using (var client = new HttpClient())
                 {
+                    //HTTP PUT - update the particular sale data
                     client.BaseAddress = new Uri("http://localhost:7266");
                     var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                     var result = await client.PutAsync("https://localhost:7267/SalesDataAnalysis/", content);
                     string resultContent = await result.Content.ReadAsStringAsync();
                     Console.WriteLine(resultContent);
+                    //Handle Exception
                     if (!result.IsSuccessStatusCode)
                     {
                         errorMessage = "Error editing";

@@ -42,7 +42,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 //Handles exception
                 catch (HttpRequestException)
                 {
-                    ModelState.AddModelError(string.Empty, $"Error getting Data Analysis for {Year}");
+                    ModelState.AddModelError(string.Empty, $"Error getting Sales Summary for the year {Year}");
                 }
             }
             return Page();

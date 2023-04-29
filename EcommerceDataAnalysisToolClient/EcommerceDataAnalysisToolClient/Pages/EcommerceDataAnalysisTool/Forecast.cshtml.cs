@@ -18,7 +18,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
         /// </summary>
         public async void OnGet()
         {
-            //connection to call Cereal endpoint
+            //connection to call endpoint
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:7266");

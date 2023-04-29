@@ -444,24 +444,6 @@ namespace EcommerceDataAnalysisToolServer.Repository
             }
             prediction["predictedCategory"] = predictedCategory;
 
-            // Get prediction for category on month
-            //JObject monthlyPrediction = new JObject();
-            //year = 2020;
-            //for (int month = 1; month <= 12; month++)
-            //{
-            //    CategoryData data = GetCategoryWhichHasHighestSales(year, month);
-            //    if (!monthlyPrediction.ContainsKey(data.category))
-            //    {
-            //        monthlyPrediction[data.category] = 1;
-            //    }
-            //    else
-            //    {
-            //        monthlyPrediction[data.category] = (int)monthlyPrediction[data.category] + 1;
-            //    }
-            //}
-            //predictedCategory = monthlyPrediction.Properties().OrderByDescending(p => p.Value).First().Name;
-            prediction["predictedCategoryOnMonth"] = predictedCategory;
-
             // Get prediction for revenue
             double[] revenueData = new double[3];
             double totalRevenue = 0;
