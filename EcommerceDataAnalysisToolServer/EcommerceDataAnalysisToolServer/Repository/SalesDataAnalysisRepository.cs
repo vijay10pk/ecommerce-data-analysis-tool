@@ -8,6 +8,8 @@ using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace EcommerceDataAnalysisToolServer.Repository
 {
@@ -108,7 +110,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
                 .Where(s => s.Date >= startDate && s.Date < endDate)
                 .Sum(s => s.Price);
 
-            return totalSales;
+            return System.Math.Truncate(totalSales);
         }
 
         /// <summary>
@@ -264,7 +266,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// </summary>
         /// <param name="year">year in YYYY format</param>
         /// <returns>Sales data summary</returns>
-        public string GetFilterBaseOnYear(int year)
+        public async Task<SalesSummary> GetFilterBaseOnYear(int year)
         {
             double totalRevenue = GetTotalRevenueForYear(year);
             CategoryData categoryWithHighestSales = GetCategoryWhichHasHighestSales(year, 0);
@@ -275,26 +277,26 @@ namespace EcommerceDataAnalysisToolServer.Repository
             // add code for highest sold product
             // Task<Ecommerce> highestSaledProduct = GetHighestSoldProductForYear(year);
 
-            var data = new
+            var salesSummary = new SalesSummary
             {
                 TotalRevenue = totalRevenue,
                 CategoryWithHighestSales = categoryWithHighestSales,
                 AverageSaleInYear = averageSaleInYear
             };
 
-            return JsonConvert.SerializeObject(data);
+            return salesSummary;
         }
 
         /// <summary>
         /// 
-        /// GetPredictionForCategory
+        /// Get Prediction For Category
         /// </summary>
         /// <returns></returns>
         public CategoryData GetPredictionForCategory()
         {
             CategoryData[] data = new CategoryData[3];
             CategoryData results = new CategoryData();
-            int year = 2015;
+            int year = 2020;
            
             for (int i=0;i<3;i++)
             {
@@ -335,7 +337,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
         }
 
         /// <summary>
-        /// GetPredictionForCategoryOnMonth
+        /// Get Prediction For Category for a Month
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
@@ -388,7 +390,7 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// <returns></returns>
         public CategoryData GetPredictionForRevenue()
         {
-            int year = 2015;
+            int year = 2020;
             CategoryData results = new CategoryData();
             double[] data = new double[3];
             double total = 0;
@@ -403,6 +405,62 @@ namespace EcommerceDataAnalysisToolServer.Repository
 
             return results;
         }
+
+        /// <summary>
+        /// GET Sales Forecast from the past sales analysis
+        /// </summary>
+        /// <returns></returns>
+        public string GetPredictionData()
+        {
+            JObject prediction = new JObject();
+
+            // Get prediction for category
+            CategoryData[] categoryData = new CategoryData[3];
+            int year = 2020;
+            for (int i = 0; i < 3; i++)
+            {
+                categoryData[i] = GetCategoryWhichHasHighestSales(year, 0);
+                year++;
+            }
+            int n = categoryData.Length;
+            int maxCount = 1;
+            string predictedCategory = categoryData[0].category;
+            int currCount = 1;
+            for (int i = 0; i < n - 1; i++)
+            {
+                currCount = 1;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (categoryData[i].category == categoryData[j].category)
+                    {
+                        currCount++;
+                    }
+                }
+                if (currCount > maxCount)
+                {
+                    maxCount = currCount;
+                    predictedCategory = categoryData[i].category;
+                }
+            }
+            prediction["predictedCategory"] = predictedCategory;
+
+            // Get prediction for revenue
+            double[] revenueData = new double[3];
+            double totalRevenue = 0;
+            year = 2020;
+            for (int i = 0; i < 3; i++)
+            {
+                revenueData[i] = GetTotalRevenueForYear(year);
+                year++;
+                totalRevenue += revenueData[i];
+            }
+            double predictedRevenue = totalRevenue / 3;
+            prediction["predictedRevenue"] = System.Math.Truncate(predictedRevenue);
+
+            // Return JSON string
+            return prediction.ToString();
+        }
+
 
         /// <summary>
         /// Method to search the sales data by product name

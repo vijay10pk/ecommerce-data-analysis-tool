@@ -12,6 +12,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
     public class AddModel : PageModel
     {
+        //Declaration of objects and variables
         public Ecommerce ecommerce = new();
         public string errorMessage = "";
         public string successMessage = "";
@@ -30,7 +31,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 
                 using (var client = new HttpClient())
                 {
-                    //HTTP POST
+                    //HTTP POST - Add the data from the form to the database
                     client.BaseAddress = new Uri("https://localhost:7267/");
                     var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                     var result = await client.PostAsync("/SalesDataAnalysis", content);

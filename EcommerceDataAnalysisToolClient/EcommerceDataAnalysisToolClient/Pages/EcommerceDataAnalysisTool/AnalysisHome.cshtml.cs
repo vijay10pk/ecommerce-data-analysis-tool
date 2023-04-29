@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using EcommerceDataAnalysisToolServer.Models;
 
 namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 {
@@ -9,36 +11,38 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
     /// </summary>
 	public class AnalysisHomeModel : PageModel
     {
-        public string category = "";
-        public CategoryData cd = new CategoryData();
-        //added variable to show user requested year in the web page
-        public string givenYear = "";
+
+        //Getter and setter for year and total revenue
+        public SalesSummary? Analysis = new();
+        [BindProperty(SupportsGet = true)]
+        public int? Year { get; set; }
+
+
         /// <summary>
         /// on get call to API
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnPostAsync()
         {
-            string year = Request.Query["year"];
-            //assigning user sent value to variable
-            givenYear = year;
-            if (year == null || year == "") { year = "2015"; }
-
-            using (var client = new HttpClient())
+            if (Year.HasValue)
             {
-                //making connection
-                client.BaseAddress = new Uri("https://localhost:7266");
-                var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/DataBasedOnYear/{year}");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    category = await response.Content.ReadAsStringAsync();
-                    category = category.Substring(9);
-                    Console.WriteLine(category);
+                    //GET Data Analysis for the selected year
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri("http://localhost:7266");
+                        var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/DataBasedOnYear/{Year}");
+                        response.EnsureSuccessStatusCode();
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        Analysis = JsonConvert.DeserializeObject<SalesSummary>(responseContent);
+                        Console.WriteLine(Analysis);
+                    }
                 }
-                else
+                //Handles exception
+                catch (HttpRequestException)
                 {
-                    category = $"Error: {response.StatusCode}";
+                    ModelState.AddModelError(string.Empty, $"Error getting Sales Summary for the year {Year}");
                 }
             }
             return Page();

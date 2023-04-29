@@ -6,6 +6,7 @@ using EcommerceDataAnalysisToolServer.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace EcommerceDataAnalysisToolServer.Controllers
 {
@@ -209,7 +210,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             double totalSalesInYear = _salesDataAnalysisRepository.GetTotalRevenueForYear(year);
             double getTotalSales = _salesDataAnalysisRepository.GetTotalCountSales(year);
-            double averageSaleInYear = (totalSalesInYear / getTotalSales);
+            double averageSaleInYear = System.Math.Truncate(totalSalesInYear / 12);
             return Ok(averageSaleInYear);
         }
 
@@ -224,7 +225,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             var salesInMonth = _salesDataAnalysisRepository.GetAverageSalesForMonth(month, year);
             var salesInYear = _salesDataAnalysisRepository.GetTotalSalesRecordInMonthForYear(month,year);
-            var averageSalesInMonth = (salesInMonth / salesInYear);
+            var averageSalesInMonth = System.Math.Truncate(salesInMonth / 30);
 
             return Ok(averageSalesInMonth);
         }
@@ -237,10 +238,10 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         /// highest sold product, total revenue</param>
         /// <returns>sales summary</returns>
         [HttpGet("DataBasedOnYear/{year}")]
-        public IActionResult GetFilterBaseOnYear(int year)
+        public async Task<ActionResult<SalesSummary>> GetFilterBaseOnYear(int year)
         {
-            string data = _salesDataAnalysisRepository.GetFilterBaseOnYear(year);
-            return Ok(data);
+            SalesSummary salesSummary = await _salesDataAnalysisRepository.GetFilterBaseOnYear(year);
+            return Ok(salesSummary);
         }
 
         /// <summary>
@@ -264,6 +265,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategory();
             return Ok(data);
         }
+
         /// <summary>
         /// GetPredictionForCategoryOnMonth
         /// </summary>
@@ -275,6 +277,18 @@ namespace EcommerceDataAnalysisToolServer.Controllers
             CategoryData data = _salesDataAnalysisRepository.GetPredictionForCategoryOnMonth(year);
             return Ok(data);
         }
+
+        /// <summary>
+        /// GET sales forecast like forecasted revenue, what category to sell and what product to sell
+        /// </summary>
+        /// <returns>Sales Forecast</returns>
+        [HttpGet("prediction")]
+        public IActionResult GetPredictionData()
+        {
+            string data = _salesDataAnalysisRepository.GetPredictionData();
+            return Ok(data);
+        }
+
         /// <summary>
         /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
         /// </summary>

@@ -26,6 +26,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
             givenmonth = month;
             using (var client = new HttpClient())
             {
+                //HTTP GET - Get the most sold category in a year
                 client.BaseAddress = new Uri("https://localhost:7266");
                 var response = await client.GetAsync($"https://localhost:7267/SalesDataAnalysis/salesByCategory/{year}");
                 if (month != null && month != "")
@@ -40,7 +41,6 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 else
                 {
                     CategoryWithHighestSales = new CategoryData();
-                   // CategoryWithHighestSales.ErrorMessage = $"Error: {response.StatusCode}";
 
                 }
             }
