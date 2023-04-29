@@ -1,0 +1,25 @@
+﻿@page
+@model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.ForecastModel
+@{
+}
+@using Newtonsoft.Json.Linq
+<div class="card">
+    @if (Model.Prediction != null)
+    {
+        <div class="card border-success mx-auto mb-3" style="max-width: 50rem;">
+            <div class="card-header text-center">Sales Forecast</div>
+            <div class="card-body text-center">
+                <div class="row"><h2>Expected Revenue</h2><h2 class="text-success card-title">@Model.Prediction["predictedRevenue"]</h2></div>
+                <div class="row"><h2>Category to be Sold more this Year</h2><h2 class="text-success card-title">@Model.Prediction["predictedCategory"]</h2></div>
+                <div class="row"><h2>Category to be Sold more each Month</h2><h2 class="text-success card-title">@Model.Prediction["predictedCategoryOnMonth"]</h2></div>
+            </div>
+        </div>
+    }
+    else 
+    {
+        <div class="alert alert-danger" role="alert">
+            Error getting Sales Forecast
+        </div>
+    }
+
+</div>

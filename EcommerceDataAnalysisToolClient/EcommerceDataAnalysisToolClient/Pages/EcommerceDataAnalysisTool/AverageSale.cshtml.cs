@@ -33,7 +33,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
 
                     using (var client = new HttpClient())
                     {
-                        //HTTP GET
+                        //HTTP GET - Calculate the average sales in a year
                         client.BaseAddress = new Uri("http://localhost:7266");
                         HttpResponseMessage response = new HttpResponseMessage();
                         if ((Year.HasValue) && (Month.HasValue == false))
@@ -52,7 +52,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 }
                 catch (HttpRequestException)
                 {
-                    ModelState.AddModelError(string.Empty, $"Error getting average sales for {Year}");
+                    ModelState.AddModelError(string.Empty, $"Error getting average sales");
                 }
             }
             return Page();

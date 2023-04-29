@@ -42,7 +42,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 //Handles exception
                 catch (HttpRequestException)
                 {
-                    ModelState.AddModelError(string.Empty, $"Error getting most sold producr for {Year}");
+                    ModelState.AddModelError(string.Empty, $"Error getting most sold product for {Year}");
                 }
             }
             else if (Year.HasValue && Month.HasValue)
@@ -66,7 +66,7 @@ namespace EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool
                 //Handles exception
                 catch (HttpRequestException)
                 {
-                    ModelState.AddModelError(string.Empty, $"Error getting most sold producr for {Month}");
+                    ModelState.AddModelError(string.Empty, $"Error getting most sold product for {Month}");
                 }
             }
             return Page();

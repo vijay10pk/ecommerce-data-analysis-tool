@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <select class="form-control text-center" id="year" name="Year">
                             <option value="">--Select a Year--</option>
-                            @for (int i = 2016; i >= 2014 && i <= 2016; i--)
+                            @for (int i = 2023; i >= 2020 && i <= 2023; i--)
                             {
                                 <option value="@i">@i</option>
                             }
@@ -38,8 +38,7 @@
         {
             <script>document.querySelector('input[name="option"]:checked').value = "year";
                 document.getElementById("yearBlock").style.display = "block";
-                document.getElementById("monthBlock").style.display = "none";
-            </script>
+                document.getElementById("monthBlock").style.display = "none";</script>
             <div class="card border-success mx-auto mb-3" style="max-width: 30rem;">
                 <div class="card-header text-center">Most Sold Product for @Model.Year</div>
                 <div class="card-body text-success text-center">
@@ -63,36 +62,34 @@
                     <div class="form-group">
                         <select class="form-control text-center" id="year" name="Year">
                             <option value="">--Select a Year--</option>
-                            @for (int i = 2016; i >= 2014 && i <= 2016; i--)
+                            @for (int i = 2022; i >= 2020 && i <= 2023; i--)
                             {
                                 <option value="@i">@i</option>
                             }
                         </select>
                     </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <select class="form-control" id="month" name="Month">
-                                <option value="">--Select Month--</option>
-                                @for (int i = 1; i <= 12; i++)
-                                {
-                                    <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <button type="submit" class="btn btn-primary">Submit </button>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <select class="form-control" id="month" name="Month">
+                            <option value="">--Select Month--</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                            }
+                        </select>
                     </div>
                 </div>
+                <div class="col-1">
+                    <button type="submit" class="btn btn-primary">Submit </button>
+                </div>
+            </div>
         </form>
         @if (!string.IsNullOrEmpty(Model.ProductMonth))
         {
-            <script>
-                document.querySelector('input[name="option"]:checked').value = "month";
+            <script>document.querySelector('input[name="option"]:checked').value = "month";
                 document.getElementById("yearBlock").style.display = "none";
-                document.getElementById("monthBlock").style.display = "block";
-            </script>
+                document.getElementById("monthBlock").style.display = "block";</script>
             <div class="card border-success mx-auto mb-3" style="max-width: 30rem;">
                 <div class="card-header text-center">Most Sold Product for @Model.Year</div>
                 <div class="card-body text-success text-center">
@@ -118,8 +115,4 @@
                 document.getElementById("monthBlock").style.display = "block";
             }
         }</script>
-
-
-
-
 </div>
