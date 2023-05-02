@@ -467,11 +467,11 @@ namespace EcommerceDataAnalysisToolServer.Repository
         /// </summary>
         /// <param name="productName">sales data by productName</param>
         /// <returns>sales data of the given product name</returns>
-        public IQueryable<Ecommerce> SearchSalesByProductName(string productName)
+        public Ecommerce SearchSalesByProductName(string productName)
         {
-            IQueryable<Ecommerce> ecommerces = _context.Ecommerce.Where(sale => sale.ProductName.StartsWith(productName));
+            Ecommerce ecommerces = _context.Ecommerce.Where(sale => sale.ProductName.StartsWith(productName)).FirstOrDefault();
             return ecommerces;
-        }
+        }
     }
 
 

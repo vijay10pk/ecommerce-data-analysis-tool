@@ -62,6 +62,29 @@ namespace EcommerceDataAnalysisToolServer.Controllers
 
         }
 
+
+        /// <summary>
+        /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
+        /// </summary>
+        /// <param name="productName">sales data by productName</param>
+        /// <returns>search sales data for the given productName</returns>
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(Ecommerce))]
+        [ProducesResponseType(404)]
+        public IActionResult GetSalesByName(string name)
+        {
+            Ecommerce sales = _salesDataAnalysisRepository.SearchSalesByProductName(name);
+            if (sales == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(sales);
+            }
+
+
+        }
         /// <summary>
         /// SalesDataAnalysis - end point for Create/Add new sales data
         /// </summary>
@@ -224,7 +247,7 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         public IActionResult GetAverageSalesInAMonth(int month, int year)
         {
             var salesInMonth = _salesDataAnalysisRepository.GetAverageSalesForMonth(month, year);
-            var salesInYear = _salesDataAnalysisRepository.GetTotalSalesRecordInMonthForYear(month,year);
+            var salesInYear = _salesDataAnalysisRepository.GetTotalSalesRecordInMonthForYear(month, year);
             var averageSalesInMonth = System.Math.Truncate(salesInMonth / 30);
 
             return Ok(averageSalesInMonth);
@@ -287,29 +310,8 @@ namespace EcommerceDataAnalysisToolServer.Controllers
         {
             string data = _salesDataAnalysisRepository.GetPredictionData();
             return Ok(data);
-        }
+        }
 
-        /// <summary>
-        /// SalesDataAnalysis/search/{productName} - end point for searching sales data for the given product name
-        /// </summary>
-        /// <param name="productName">sales data by productName</param>
-        /// <returns>search sales data for the given productName</returns>
-        [HttpGet("search/{productName}")]
-        [ProducesResponseType(200, Type = typeof(Ecommerce))]
-        [ProducesResponseType(404)]
-        public IActionResult SearchSalesByProductName(string productName)
-        {
-            IQueryable<Ecommerce> sales = _salesDataAnalysisRepository.SearchSalesByProductName(productName);
-            if (sales == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(sales);
-            }
 
-        }
-    }
+    }
 }
-
