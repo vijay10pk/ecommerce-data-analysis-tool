@@ -31,6 +31,7 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
         CategoryData GetPredictionForCategoryOnMonth(int year);
 
         CategoryData GetPredictionForRevenue();
+		
         string GetPredictionData();
         Ecommerce SearchSalesByProductName(String productName);
 
