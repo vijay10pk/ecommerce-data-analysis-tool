@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model EcommerceDataAnalysisToolClient.Pages.EcommerceDataAnalysisTool.IndexModel
 @{
 
@@ -10,6 +10,11 @@
 <div class="text-left">
     <a class='btn btn-primary btn-sm' href='/EcommerceDataAnalysisTool/add'>Add Ecommerce</a>
     <button class="btn btn-secondary btn-sm" onclick="window.scrollTo(0,document.body.scrollHeight);">Go to Bottom</button>
+    <form id="search-form">
+        <label for="search-input">Search:</label>
+        <input type="text" id="search-input" class="form-control" placeholder="Enter search term...">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 
 <table class="table">
@@ -24,7 +29,7 @@
             <th>Brand</th>
         </tr>
     </thead>
-    <tbody>
+<tbody>
         @foreach (var item in Model.Ecommerce)
         {
             <tr>
@@ -49,4 +54,3 @@
 <div>
     <button class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, 0);">Go to top</button>
 </div>
-
