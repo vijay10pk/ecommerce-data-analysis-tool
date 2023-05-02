@@ -32,7 +32,7 @@ namespace EcommerceDataAnalysisToolServer.Interfaces
 
         CategoryData GetPredictionForRevenue();
         string GetPredictionData();
-        IQueryable<Ecommerce> SearchSalesByProductName(String productName);
+        Ecommerce SearchSalesByProductName(String productName);
 
     }
 
